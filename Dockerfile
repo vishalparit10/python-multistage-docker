@@ -6,6 +6,8 @@ WORKDIR /app
 COPY backend/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN pip install Flask
+
 COPY backend/ .
 
 # Stage 2: Final Image
@@ -15,7 +17,8 @@ WORKDIR /app
 
 COPY --from=backend-builder /app /app
 
+RUN pip install Flask
+
 EXPOSE 5000
 
 CMD ["python", "app.py"]
-
